@@ -6,6 +6,12 @@ const configs = {
     host: process.env.HOST || "http://localhost:3000",
     nodeEnv: process.env.NODE_ENV || "development",
     secretOrKey: process.env.JWT_SECRET,
+    firebase: {
+      apiKey: process.env.FIREBASE_API_KEY,
+      authDomain: process.env.FIREBASE_AUTH_DOM,
+      projectId: process.env.FIREBASE_PROJECT_ID,
+      storageBucket: process.env.FIREBASE_STORAGE_BUCKET,
+    },
   },
   db: {
     development: {
@@ -15,7 +21,7 @@ const configs = {
       port: 5432,
       username: "postgres",
       password: "root",
-      database: "example",
+      database: "movies-api",
       define: {
         timestamps: true, //? Nos obliga a que todas las tablas tengan la propiedad createdAt y upadtedAt
         underscored: true,

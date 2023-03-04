@@ -4,9 +4,12 @@ const responseHandlers = require("./utils/handleResponses");
 const db = require("./utils/database");
 const initModels = require("./models/initModels");
 const config = require("../config").api;
+const upload = require("./utils/multer.js");
 
 const userRouter = require("./users/users.router");
 const authRouter = require("./auth/auth.router");
+const moviesRouter = require("./movies/movies.routers.js");
+const genreRouter = require("./genres/genres.routes.js");
 
 const app = express();
 
@@ -33,8 +36,14 @@ app.get("/", (req, res) => {
   });
 });
 
+app.post("./upload-file", upload.single("myImage"), (req, res) => {
+  res.status(200).json(req.file);
+});
+
 app.use("/api/v1/users", userRouter);
 app.use("/api/v1/auth", authRouter);
+app.use("/api/v1/movies", moviesRouter);
+app.use("/api/v1/genres", genreRouter);
 
 app.use("*", (req, res) => {
   responseHandlers.error({
